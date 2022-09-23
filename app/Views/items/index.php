@@ -1,5 +1,13 @@
 <h3>List Barang</h3>
 
+<a href="/items/new" class="btn btn-sm btn-primary mb-2">Tambah Barang</a>
+
+<?php foreach (session()->getFlashdata() as $key => $flash) : ?>
+  <div class="alert alert-<?= $key ?>" role="alert">
+    <?= $flash ?>
+  </div>
+<?php endforeach; ?>
+
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
