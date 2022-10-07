@@ -12,6 +12,7 @@
   <thead>
     <tr>
       <th>No</th>
+      <th>Image</th>
       <th>Nama</th>
       <th>Satuan</th>
       <th>Harga</th>
@@ -27,6 +28,7 @@
       <?php foreach($items as $index => $item): ?>
         <tr>
           <td><?= $index + 1 ?></td>
+          <td><img src="/assets/images/<?= $item->image_name ?>" alt="Image for <?= $item->name ?>" width="200px"/></td>
           <td><?= $item->name ?></td>
           <td><?= $item->unit ?></td>
           <td><?= $item->price ?></td>
@@ -43,3 +45,4 @@
     <?php endif; ?>
   </tbody>
 </table>
+

@@ -14,7 +14,7 @@ class ItemModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'unit', 'price'];
+    protected $allowedFields    = ['name', 'unit', 'price', 'image_name'];
 
     // Dates
     protected $useTimestamps = false;
@@ -49,10 +49,15 @@ class ItemModel extends Model
     }
 
     public function create_data($params){
+        $uploaded_file = $params->getFile('image_upload');
+        $image_name = $uploaded_file->getRandomName();
+        $uploaded_file->move('assets/images', $image_name);
+
         $data = [
             'name' => $params->getVar('name'),
             'unit' => $params->getVar('unit'),
-            'price' => $params->getVar('price')
+            'price' => $params->getVar('price'),
+            'image_name' => $image_name
         ];
         return $this->save($data);
     }

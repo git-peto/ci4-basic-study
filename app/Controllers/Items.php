@@ -34,6 +34,7 @@ class Items extends BaseController
             'name' => "required|alpha_numeric_space",
             'unit'  => 'required|alpha_numeric_space',
             'price'  => 'required|integer',
+            'image_upload' => 'uploaded[image_upload]'
         ])) {
             $data['main_view'] = 'items/new';
             $data['errors'] = $this->validator;

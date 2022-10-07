@@ -2,7 +2,7 @@
 
 <a href="/items" class="btn btn-sm btn-primary mb-2">List Barang</a>
 
-<form action="/items" method="post">
+<form action="/items" method="post" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
     <input type="text" name="name" id="name" class="form-control" value="<?= set_value('name') ?>">
@@ -27,6 +27,15 @@
     <?php if (isset($errors) and $errors->getError('price')) { ?>
       <div class='text-danger mt-2'>
         <?= $error = $errors->getError('price'); ?>
+      </div>
+    <?php } ?>
+  </div>
+  <div class="mb-3">
+    <label for="image_upload" class="form-label">Image</label>
+    <input type="file" name="image_upload" id="image_upload" class="form-control" value="<?= set_value('image_upload') ?>">
+    <?php if (isset($errors) and $errors->getError('image_upload')) { ?>
+      <div class='text-danger mt-2'>
+        <?= $error = $errors->getError('image_upload'); ?>
       </div>
     <?php } ?>
   </div>
