@@ -15,26 +15,31 @@
       <th>Nama</th>
       <th>Satuan</th>
       <th>Harga</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>Barang Satu</td>
-      <td>Buah</td>
-      <td>1.000.000</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Barang Dua</td>
-      <td>Gram</td>
-      <td>1.200.000</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Barang Tiga</td>
-      <td>Gram</td>
-      <td>800.000</td>
-    </tr>
+    <?php if(empty($items)): ?>
+      <tr>
+        <td colspan=3>Tidak ada data</td>
+      </tr>
+    <?php else: ?>
+      <?php foreach($items as $index => $item): ?>
+        <tr>
+          <td><?= $index + 1 ?></td>
+          <td><?= $item->name ?></td>
+          <td><?= $item->unit ?></td>
+          <td><?= $item->price ?></td>
+          <td>
+            <form action="/items/delete" method="post">
+              <input type="hidden" name="_method" value="DELETE" />
+              <input type="hidden" name="id" value="<?= $item->id ?>" />
+              <a href="/items/<?= $item->id ?>/edit" class="btn btn-sm btn-warning">Ubah</a>
+              <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+            </form>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+    <?php endif; ?>
   </tbody>
 </table>
