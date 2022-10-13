@@ -97,4 +97,10 @@ class Items extends BaseController
         $this->session->setFlashdata('success', 'Barang berhasil diperbarui');
         return redirect()->to('/items');
     }
+
+    public function show($id){
+        $item_model = new ItemModel();
+        $data['item'] = $item_model->get_data($id);
+        return view('items/show', $data);
+    }
 }

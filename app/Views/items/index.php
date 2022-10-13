@@ -36,6 +36,7 @@
             <form action="/items/delete" method="post" class="form-delete">
               <input type="hidden" name="_method" value="DELETE" />
               <input type="hidden" name="id" value="<?= $item->id ?>" />
+              <a href="/items/<?= $item->id ?>" class="btn btn-sm btn-info btn-lihat">Lihat</a>
               <a href="/items/<?= $item->id ?>/edit" class="btn btn-sm btn-warning">Ubah</a>
               <button type="submit" class="btn btn-sm btn-danger btnHapus">Hapus</button>
             </form>
@@ -45,6 +46,23 @@
     <?php endif; ?>
   </tbody>
 </table>
+
+<div class="modal fade" tabindex="-1" id="modal-show-item">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Loading..</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Loading..
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
   $(function(){
@@ -74,6 +92,28 @@
         },
         error: function(){
           alert("Gagal menghapus data")
+        },
+      })
+    })
+
+    $('.btn-lihat').on("click", function(event){
+      event.preventDefault()
+
+      var url = $(this).attr('href')
+      $("#modal-show-item .modal-title").html('Loading..')
+      $("#modal-show-item .modal-body").html('Loading...')
+      $("#modal-show-item").modal('show')
+      $.ajax({
+        type: 'get',
+        url: url,
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        dataType: 'html',
+        success: function(data){
+          $("#modal-show-item .modal-title").html('Rincian Barang')
+          $("#modal-show-item .modal-body").html(data)
+        },
+        error: function(){
+          alert("Gagal mengambil data")
         },
       })
     })
