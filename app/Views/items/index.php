@@ -26,14 +26,14 @@
       </tr>
     <?php else: ?>
       <?php foreach($items as $index => $item): ?>
-        <tr>
+        <tr id="item_<?= $item->id ?>">
           <td><?= $index + 1 ?></td>
           <td><img src="/assets/images/<?= $item->image_name ?>" alt="Image for <?= $item->name ?>" width="200px"/></td>
           <td><?= $item->name ?></td>
           <td><?= $item->unit ?></td>
           <td><?= $item->price ?></td>
           <td>
-            <form action="/items/delete" method="post">
+            <form action="/items/delete" method="post" class="form-delete">
               <input type="hidden" name="_method" value="DELETE" />
               <input type="hidden" name="id" value="<?= $item->id ?>" />
               <a href="/items/<?= $item->id ?>/edit" class="btn btn-sm btn-warning">Ubah</a>
@@ -51,7 +51,31 @@
     $('.btnHapus').on("click", function(event){
       if(!confirm("Yakin hapus data ini?")){
         event.preventDefault()
-      }  
+      }
+    })
+
+    $('.form-delete').on("submit", function(event){
+      event.preventDefault()
+
+      var form = $(this)
+      var actionUrl = form.attr('action');
+      $.ajax({
+        type: 'post',
+        url: actionUrl,
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        data: form.serialize(),
+        dataType: 'json',
+        success: function(data){
+          if(data.status == 200){
+            $("#item_" + data.id).remove()
+          } else {
+            alert(data.message)
+          }
+        },
+        error: function(){
+          alert("Gagal menghapus data")
+        },
+      })
     })
   })
 </script>

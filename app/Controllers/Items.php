@@ -48,11 +48,30 @@ class Items extends BaseController
     }
 
     public function delete($id){
-        $id = $this->request->getVar('id');
-        $item_model = new ItemModel();
-        $item_model->delete($id);
-        $this->session->setFlashdata('success', 'Barang berhasil dihapus');
-        return redirect()->to('/items');
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $item_model = new ItemModel();
+            if($item_model->delete($id)){
+                $data = [
+                    'status' => 200,
+                    'message' => 'Barang berhasil dihapus',
+                    'id' => $id
+                ];
+            } else {
+                $data = [
+                    'status' => 500,
+                    'message' => 'Barang gagal dihapus karena tidak ditemukan. Coba refresh kembali.',
+                    'id' => $id
+                ];
+            }
+        } else {
+            $data = [
+                'status' => 500,
+                'message' => 'Anda tidak diizinkan untuk menghapus data',
+                'id' => null
+            ];
+        }
+        echo json_encode($data);
     }
 
     public function edit($id){
