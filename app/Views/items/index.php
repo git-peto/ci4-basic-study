@@ -37,7 +37,7 @@
               <input type="hidden" name="_method" value="DELETE" />
               <input type="hidden" name="id" value="<?= $item->id ?>" />
               <a href="/items/<?= $item->id ?>/edit" class="btn btn-sm btn-warning">Ubah</a>
-              <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+              <button type="submit" class="btn btn-sm btn-danger btnHapus">Hapus</button>
             </form>
           </td>
         </tr>
@@ -46,3 +46,12 @@
   </tbody>
 </table>
 
+<script type="text/javascript">
+  $(function(){
+    $('.btnHapus').on("click", function(event){
+      if(!confirm("Yakin hapus data ini?")){
+        event.preventDefault()
+      }  
+    })
+  })
+</script>
