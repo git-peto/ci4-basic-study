@@ -17,9 +17,15 @@ class Items extends BaseController
     public function index()
     {
         $item_model = new ItemModel();
-        $data['main_view'] = 'items/index';
-        $data['items'] = $item_model->get_all_data();
-        return view('layout', $data);
+        if ($this->request->isAJAX()) {
+            $search = $this->request->getVar('search');
+            $data['items'] = $item_model->search_data($search);
+            return view('items/_items', $data);
+        } else {
+            $data['main_view'] = 'items/index';
+            $data['items'] = $item_model->get_all_data();
+            return view('layout', $data);
+        }
     }
 
     public function new()

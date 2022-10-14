@@ -1,6 +1,17 @@
 <h3>List Barang</h3>
-
-<a href="/items/new" class="btn btn-sm btn-primary mb-2">Tambah Barang</a>
+<hr/>
+<div class="row">
+  <div class="col-12 col-xl-5 col-lg-6">
+    <form action="/items" method="get" class="mb-2" id="form-search">
+      <div class="input-group">
+        <span class="input-group-text fw-bold">Cari Barang</span>
+        <input type="text" name="search" id="search" placeholder="Masukkan nama barang" class="form-control">
+        <input type="submit" value="Cari" class="btn btn-primary">
+        <a href="/items/new" class="btn btn-outline-secondary">Tambah</a>
+      </div>
+    </form>
+  </div>
+</div>
 
 <?php foreach (session()->getFlashdata() as $key => $flash) : ?>
   <div class="alert alert-<?= $key ?>" role="alert">
@@ -8,44 +19,9 @@
   </div>
 <?php endforeach; ?>
 
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>No</th>
-      <th>Image</th>
-      <th>Nama</th>
-      <th>Satuan</th>
-      <th>Harga</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php if(empty($items)): ?>
-      <tr>
-        <td colspan=3>Tidak ada data</td>
-      </tr>
-    <?php else: ?>
-      <?php foreach($items as $index => $item): ?>
-        <tr id="item_<?= $item->id ?>">
-          <td><?= $index + 1 ?></td>
-          <td><img src="/assets/images/<?= $item->image_name ?>" alt="Image for <?= $item->name ?>" width="200px"/></td>
-          <td><?= $item->name ?></td>
-          <td><?= $item->unit ?></td>
-          <td><?= $item->price ?></td>
-          <td>
-            <form action="/items/delete" method="post" class="form-delete">
-              <input type="hidden" name="_method" value="DELETE" />
-              <input type="hidden" name="id" value="<?= $item->id ?>" />
-              <a href="/items/<?= $item->id ?>" class="btn btn-sm btn-info btn-lihat">Lihat</a>
-              <a href="/items/<?= $item->id ?>/edit" class="btn btn-sm btn-warning">Ubah</a>
-              <button type="submit" class="btn btn-sm btn-danger btnHapus">Hapus</button>
-            </form>
-          </td>
-        </tr>
-      <?php endforeach; ?>
-    <?php endif; ?>
-  </tbody>
-</table>
+<div id="table-result">
+  <?= view('items/_items', ['items' => $items]) ?>
+</div>
 
 <div class="modal fade" tabindex="-1" id="modal-show-item">
   <div class="modal-dialog">
@@ -92,6 +68,26 @@
         },
         error: function(){
           alert("Gagal menghapus data")
+        },
+      })
+    })
+
+    $('#form-search').on("submit", function(event){
+      event.preventDefault();
+
+      var form = $(this)
+      var actionUrl = form.attr('action');
+      $.ajax({
+        type: 'get',
+        url: actionUrl,
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        data: form.serialize(),
+        dataType: 'html',
+        success: function(data){
+          $("#table-result").html(data)
+        },
+        error: function(){
+          alert("Gagal mencari data")
         },
       })
     })

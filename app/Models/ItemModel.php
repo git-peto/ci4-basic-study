@@ -48,6 +48,11 @@ class ItemModel extends Model
         return $this->find($id);
     }
 
+    public function search_data($search) {
+        $query = $this->like('LOWER(name)', strtolower($search));
+        return $query->get()->getResult();
+    }
+
     public function create_data($params){
         $uploaded_file = $params->getFile('image_upload');
         $image_name = $uploaded_file->getRandomName();
