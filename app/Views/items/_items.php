@@ -17,7 +17,7 @@
       <?php else: ?>
         <?php foreach($items as $index => $item): ?>
           <tr id="item_<?= $item['id'] ?>">
-            <td><?= $index + 1 ?></td>
+            <td><?= $order_number++ ?></td>
             <td><img src="/assets/images/<?= $item['image_name'] ?>" alt="Image for <?= $item['name'] ?>" width="200px"/></td>
             <td><?= $item['name'] ?></td>
             <td><?= $item['unit'] ?></td>

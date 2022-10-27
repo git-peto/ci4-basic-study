@@ -20,6 +20,7 @@ class Items extends BaseController
         $search = $this->request->getVar('search') ?? '';
         $data['items'] = $item_model->search_data($search);
         $data['pager'] = $item_model->pager;
+        $data['order_number'] = order_page_number($this->request->getVar('page_items'), 5);
         if ($this->request->isAJAX()) {
             return view('items/_items', $data);
         } else {
