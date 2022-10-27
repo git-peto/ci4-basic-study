@@ -16,18 +16,18 @@
         </tr>
       <?php else: ?>
         <?php foreach($items as $index => $item): ?>
-          <tr id="item_<?= $item->id ?>">
+          <tr id="item_<?= $item['id'] ?>">
             <td><?= $index + 1 ?></td>
-            <td><img src="/assets/images/<?= $item->image_name ?>" alt="Image for <?= $item->name ?>" width="200px"/></td>
-            <td><?= $item->name ?></td>
-            <td><?= $item->unit ?></td>
-            <td><?= $item->price ?></td>
+            <td><img src="/assets/images/<?= $item['image_name'] ?>" alt="Image for <?= $item['name'] ?>" width="200px"/></td>
+            <td><?= $item['name'] ?></td>
+            <td><?= $item['unit'] ?></td>
+            <td><?= $item['price'] ?></td>
             <td>
               <form action="/items/delete" method="post" class="form-delete">
                 <input type="hidden" name="_method" value="DELETE" />
-                <input type="hidden" name="id" value="<?= $item->id ?>" />
-                <a href="/items/<?= $item->id ?>" class="btn btn-sm btn-info btn-lihat">Lihat</a>
-                <a href="/items/<?= $item->id ?>/edit" class="btn btn-sm btn-warning">Ubah</a>
+                <input type="hidden" name="id" value="<?= $item['id'] ?>" />
+                <a href="/items/<?= $item['id'] ?>" class="btn btn-sm btn-info btn-lihat">Lihat</a>
+                <a href="/items/<?= $item['id'] ?>/edit" class="btn btn-sm btn-warning">Ubah</a>
                 <button type="submit" class="btn btn-sm btn-danger btnHapus">Hapus</button>
               </form>
             </td>
@@ -36,3 +36,4 @@
       <?php endif; ?>
     </tbody>
   </table>
+  <?= $pager->links() ?>
