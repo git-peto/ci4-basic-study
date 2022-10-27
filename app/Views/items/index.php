@@ -5,7 +5,7 @@
     <form action="/items" method="get" class="mb-2" id="form-search">
       <div class="input-group">
         <span class="input-group-text fw-bold">Cari Barang</span>
-        <input type="text" name="search" id="search" placeholder="Masukkan nama barang" class="form-control">
+        <input type="text" name="search" id="search" placeholder="Masukkan nama barang" class="form-control" autocomplete="off">
         <input type="submit" value="Cari" class="btn btn-primary">
         <a href="/items/new" class="btn btn-outline-secondary">Tambah</a>
       </div>
@@ -112,6 +112,13 @@
           alert("Gagal mengambil data")
         },
       })
+    })
+
+    $("#search").on("keyup", function(){
+      var text_search = $(this).val()
+      if(text_search.length >= 3 || text_search.length == 0) {
+        $("#form-search").trigger("submit")
+      }
     })
   })
 </script>

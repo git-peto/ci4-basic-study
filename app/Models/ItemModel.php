@@ -50,6 +50,8 @@ class ItemModel extends Model
 
     public function search_data($search) {
         $query = $this->like('LOWER(name)', strtolower($search));
+        $query = $query->orLike('LOWER(price)', strtolower($search));
+        $query = $query->orLike('LOWER(unit)', strtolower($search));
         return $query->get()->getResult();
     }
 

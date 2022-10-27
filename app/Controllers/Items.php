@@ -92,8 +92,10 @@ class Items extends BaseController
             'unit'  => 'required|alpha_numeric_space',
             'price'  => 'required|integer',
         ])) {
+            $item_model = new ItemModel();
             $data['main_view'] = 'items/edit';
             $data['errors'] = $this->validator;
+            $data['item'] = $item_model->get_data($id);
             return view('layout', $data);
         }
 
