@@ -53,7 +53,7 @@ class ItemModel extends Model
         $query = $query->orLike('LOWER(price)', strtolower($search));
         $query = $query->orLike('LOWER(unit)', strtolower($search));
         $query = $query->orderBy('name', 'ASC');
-        return $query->paginate(5);
+        return $query->paginate(5, 'items');
     }
 
     public function create_data($params){

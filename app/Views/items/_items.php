@@ -36,4 +36,4 @@
       <?php endif; ?>
     </tbody>
   </table>
-  <?= $pager->links() ?>
+  <?= $pager->links('items', 'bootstrap_template') ?>
