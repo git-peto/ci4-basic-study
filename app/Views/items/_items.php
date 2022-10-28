@@ -6,6 +6,7 @@
         <th>Nama</th>
         <th>Satuan</th>
         <th>Harga</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -22,6 +23,15 @@
             <td><?= $item['name'] ?></td>
             <td><?= $item['unit'] ?></td>
             <td><?= $item['price'] ?></td>
+            <td>
+              <?php
+                if($item['status_id'] == 1):
+                  echo "<span class='badge bg-primary'>Aktif</span>";
+                else:
+                  echo "<span class='badge bg-danger'>Tidak Aktif</span>";
+                endif;
+              ?>
+            </td>
             <td>
               <form action="/items/delete" method="post" class="form-delete">
                 <input type="hidden" name="_method" value="DELETE" />
