@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\UserModel;
 
 class Sessions extends BaseController
 {
@@ -27,12 +28,13 @@ class Sessions extends BaseController
     {
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
-        if ($email == 'test@email.com' && $password == '123') {
+        $user_model = new UserModel();
+        if($user_model->auth_user($email, $password)){
             $this->session->set('user_id', 1);
             return redirect()->to('/pages');
         } else {
             $this->session->setFlashdata('danger', 'Email dan Password yang Anda masukkan tidak sesuai');
-            return redirect()->to('/pages');
+            return redirect()->to('/');
         }
     }
 

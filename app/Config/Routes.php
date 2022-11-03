@@ -44,6 +44,7 @@ $routes->resource('sessions');
 $routes->resource('pages');
 $routes->resource('items');
 $routes->resource('employees');
+$routes->resource('users');
 
 /*
  * --------------------------------------------------------------------
