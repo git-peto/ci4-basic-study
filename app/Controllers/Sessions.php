@@ -29,8 +29,9 @@ class Sessions extends BaseController
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
         $user_model = new UserModel();
-        if($user_model->auth_user($email, $password)){
-            $this->session->set('user_id', 1);
+        $user = $user_model->auth_user($email, $password);
+        if($user != NULL){
+            $this->session->set('user_id', $user['id']);
             return redirect()->to('/pages');
         } else {
             $this->session->setFlashdata('danger', 'Email dan Password yang Anda masukkan tidak sesuai');

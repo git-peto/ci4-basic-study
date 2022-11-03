@@ -35,7 +35,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item ml-auto">
           <form action="/sessions/logout" method="post">
-            <button type="submit" class="btn btn-link nav-link">Admin | Keluar</button>
+            <button type="submit" class="btn btn-link nav-link"><?= current_user() == NULL ? "-" : current_user()['name'] ?> | Keluar</button>
           </form>
         </li>
       </ul>

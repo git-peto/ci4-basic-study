@@ -78,14 +78,13 @@ class UserModel extends Model
     public function auth_user($email, $password){
         $query = $this->where('LOWER(email)', strtolower(trim($email)));
         $result = $query->get()->getRowArray();
-        $match = false;
         if($result === NULL){
-            $match = false;
+            $user = null;
         } else if(password_verify($password, $result['password'])){
-            $match = true;
+            $user = $result;
         } else {
-            $match = false;
+            $user = null;
         }
-        return $match;
+        return $user;
     }
 }
