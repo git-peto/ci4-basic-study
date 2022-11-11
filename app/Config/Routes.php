@@ -46,6 +46,10 @@ $routes->resource('items');
 $routes->resource('employees');
 $routes->resource('users');
 
+$routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes){
+    $routes->resource('items');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
