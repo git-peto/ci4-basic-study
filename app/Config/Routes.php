@@ -40,10 +40,13 @@ $routes->get('pages/dashboard', 'Pages::dashboard');
 $routes->get('employees/add', 'Employee::add');
 $routes->post('checklogin', 'Pages::checklogin');
 $routes->post('sessions/logout', 'Sessions::logout');
-$routes->resource('sessions');
-$routes->resource('pages');
-$routes->resource('items');
+$routes->get('items/get_autocomplete', 'Items::get_autocomplete');
 $routes->resource('employees');
+$routes->resource('items');
+$routes->resource('pages');
+$routes->resource('sales');
+$routes->resource('saleitems');
+$routes->resource('sessions');
 $routes->resource('users');
 
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes){

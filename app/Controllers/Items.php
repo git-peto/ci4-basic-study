@@ -112,4 +112,17 @@ class Items extends BaseController
         $data['item'] = $item_model->get_data($id);
         return view('items/show', $data);
     }
+
+    public function get_autocomplete(){
+        $item_model = new ItemModel();
+        $search = $this->request->getVar('term') ?? '';
+        $results = $item_model->search_data($search);
+        foreach($results as $row):
+            $arr_result[] = [
+                'id' => $row['id'],
+                'label' => $row['name']
+            ];
+        endforeach;
+        echo json_encode($arr_result);
+    }
 }
