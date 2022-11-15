@@ -21,5 +21,5 @@
 </form>
 
 <script>
-  $('#invoice_date').datepicker();
+  $('#invoice_date').datetimepicker();
 </script>
