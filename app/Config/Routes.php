@@ -41,6 +41,7 @@ $routes->get('employees/add', 'Employee::add');
 $routes->post('checklogin', 'Pages::checklogin');
 $routes->post('sessions/logout', 'Sessions::logout');
 $routes->get('items/get_autocomplete', 'Items::get_autocomplete');
+$routes->resource('customers');
 $routes->resource('employees');
 $routes->resource('items');
 $routes->resource('pages');

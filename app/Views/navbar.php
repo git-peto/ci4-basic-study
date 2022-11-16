@@ -19,6 +19,9 @@
           <a class="nav-link" href="/users">User</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/customers">Customer</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/sales">Sale</a>
         </li>
         <li class="nav-item dropdown">
