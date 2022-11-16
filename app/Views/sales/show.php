@@ -18,7 +18,7 @@
     </tr>
     <tr>
       <th width="20%">Grand Total</th>
-      <td><?= $sale['grand_total'] ?></td>
+      <td><?= thousand_separator($sale['grand_total']) ?></td>
     </tr>
   </tbody>
 </table>
@@ -41,8 +41,8 @@
         <td><?= $index + 1 ?></td>
         <td><?= $sale_item->item_name ?></td>
         <td><?= $sale_item->quantity ?></td>
-        <td><?= $sale_item->price ?></td>
-        <td><?= $sale_item->subtotal ?></td>
+        <td><?= thousand_separator($sale_item->price) ?></td>
+        <td><?= thousand_separator($sale_item->subtotal) ?></td>
       </tr>
     <?php endforeach; ?>
   </tbody>

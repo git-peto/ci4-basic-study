@@ -25,3 +25,11 @@ if(!function_exists('order_page_number'))
         return $nomor;
     }
 }
+
+if(!function_exists('thousand_separator'))
+{
+    function thousand_separator($amount)
+    {
+        return number_format($amount, 2, ",", ".");
+    }
+}
