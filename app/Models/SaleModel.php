@@ -14,7 +14,7 @@ class SaleModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['invoice_no', 'invoice_date', 'customer_id'];
+    protected $allowedFields    = ['invoice_no', 'invoice_date', 'customer_id', 'grand_total'];
 
     // Dates
     protected $useTimestamps = false;
@@ -65,5 +65,16 @@ class SaleModel extends Model
             'customer_id' => $params->getVar('customer_id')
         ];
         return $this->save($data);
+    }
+
+    public function update_grand_total($id){
+        $query = $this->where('sales.id', $id);
+        $query = $query->join('sale_items', 'sale_items.sale_id = sales.id');
+        $query = $query->selectSum('subtotal', 'grand_total');
+        $query = $query->get()->getRow();
+        $data = [
+            'grand_total' => $query->grand_total
+        ];
+        return $this->update($id, $data);
     }
 }
