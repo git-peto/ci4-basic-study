@@ -41,7 +41,9 @@ class SaleModel extends Model
     protected $afterDelete    = [];
 
     public function get_all_data(){
-        return $this->get()->getResult();
+        $query = $this->join('customers', 'customers.id = sales.customer_id');
+        $query = $query->select('sales.*, customers.name AS customer_name');
+        return $query->get()->getResult();
     }
 
     public function get_data($id){

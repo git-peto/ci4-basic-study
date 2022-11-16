@@ -34,7 +34,7 @@
             </td>
             <td><?= $sale->invoice_no ?></td>
             <td><?= $sale->invoice_date ?></td>
-            <td><?= $sale->customer_id ?></td>
+            <td><?= $sale->customer_name ?></td>
             <td><?= thousand_separator($sale->grand_total) ?></td>
           </tr>
         <?php endforeach; ?>
