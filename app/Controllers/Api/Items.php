@@ -13,7 +13,27 @@ class Items extends BaseController
     public function index()
     {
         $item_model = new ItemModel();
-        $data['items'] = $item_model->search_data('');
+        $search = $this->request->getVar('search') ?? '';
+        $data['items'] = $item_model->search_data($search);
+        $data['message'] = 'Barang berhasil diload';
         return $this->setResponseFormat('json')->respond($data, 200);
+    }
+
+    public function show($id){
+        $item_model = new ItemModel();
+        $data['item'] = $item_model->get_data($id);
+        $data['message'] = 'Barang berhasil diload';
+        return $this->setResponseFormat('json')->respond($data, 200);
+    }
+
+    public function create(){
+        $item_model = new ItemModel();
+        if($item_model->create_data($this->request)){
+            $data['message'] = 'Barang berhasil disimpan';
+            return $this->setResponseFormat('json')->respond($data, 200);
+        } else {
+            $data['message'] = 'Barang gagal disimpan';
+            return $this->setResponseFormat('json')->respond($data, 500);
+        }
     }
 }
