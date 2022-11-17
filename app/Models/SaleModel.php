@@ -14,7 +14,7 @@ class SaleModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['invoice_no', 'invoice_date', 'customer_id', 'grand_total'];
+    protected $allowedFields    = ['invoice_no', 'invoice_date', 'customer_id', 'grand_total', 'user_id'];
 
     // Dates
     protected $useTimestamps = false;
@@ -42,7 +42,8 @@ class SaleModel extends Model
 
     public function get_all_data(){
         $query = $this->join('customers', 'customers.id = sales.customer_id');
-        $query = $query->select('sales.*, customers.name AS customer_name');
+        $query = $query->join('users', 'users.id = sales.user_id');
+        $query = $query->select('sales.*, customers.name AS customer_name, users.name AS user_name');
         return $query->get()->getResult();
     }
 
@@ -64,7 +65,8 @@ class SaleModel extends Model
         $data = [
             'invoice_no' => $invoice_no,
             'invoice_date' => $params->getVar('invoice_date'),
-            'customer_id' => $params->getVar('customer_id')
+            'customer_id' => $params->getVar('customer_id'),
+            'user_id' => current_user()['id']
         ];
         return $this->save($data);
     }

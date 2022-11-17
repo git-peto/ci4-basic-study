@@ -18,6 +18,7 @@
         <th>Invoice Date</th>
         <th>Customer</th>
         <th>Grand Total</th>
+        <th>User</th>
       </tr>
     </thead>
     <tbody>
@@ -36,6 +37,7 @@
             <td><?= $sale->invoice_date ?></td>
             <td><?= $sale->customer_name ?></td>
             <td><?= thousand_separator($sale->grand_total) ?></td>
+            <td><?= $sale->user_name ?></td>
           </tr>
         <?php endforeach; ?>
       <?php endif; ?>
